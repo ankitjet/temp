@@ -1,0 +1,67 @@
+This is an example of one of the customer below imn .yml format :
+AZ_UC_CORE_SUBS: 9079
+AZ_CC_BASIC_VCE_SUBS: 1000
+AZ_EMERGENCY_CALLING: LDS
+AZ_AES_API_BASIC_TSAPI_SUBS: 1000
+AZ_VERINT_DUAL: 1.0
+DATA_OUT_CDR: 1000
+workbook:
+    applications:
+      site:
+        '1':
+          type: remote
+          dial_plan: 101
+          codec: g711
+          e911: 'y'
+          call_routing: 'n'
+          utc_offset: '-05:00'
+          uc_users: 4000
+          cc_users: 500
+          name: Remote Site1
+          trunk:
+            - 2
+        '2':
+          type: remote
+          dial_plan: 101
+          codec: g711
+          e911: 'y'
+          call_routing: 'n'
+          utc_offset: '-05:00'
+          uc_users: 5079
+          cc_users: 500
+          name:  Remote Site2
+          trunk:
+            - 2
+      cm_users_split:
+        - cc: 1000
+          uc: 9079
+      trunk:
+        '1':
+          name: trunk1
+          region: NAR
+          sip_svr_cnnt:
+            - test1.trunk.cpaas.avayacloud.com,5061,tls
+        '2':
+          name: trunk2
+          region: NAR
+          sip_svr_cnnt:
+            - test2.trunk.cpass.avayacloud.com,5060,udp
+      region:
+        NAR:
+          dial_plan: 101
+          trunk:
+            - 1
+      cdr:
+        internal_calls_records: 0
+      verint:
+        verint_domain: 'gbt01.verintcloudservices.com'
+        verint_subnet: 1.1.1.0/26
+        dual:
+        recs: 100
+        ris:
+            - 'gbt01.verintcloudservices.com'
+            - 'gbt01.verintcloudservices.com'
+        uri_groups:
+            - '[+]?[1]?555??????[0-9]{1}@.*'
+            - '[+]?[1]?555??????[0-9]{1}@.*'
+Now i want to modify above yaml for 250 remote site and 40,000 subscribers please modify the yaml for me and send the modified yaml
