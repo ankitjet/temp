@@ -1,67 +1,3060 @@
-This is an example of one of the customer below imn .yml format :
-AZ_UC_CORE_SUBS: 9079
+AZ_UC_CORE_SUBS: 40000
 AZ_CC_BASIC_VCE_SUBS: 1000
 AZ_EMERGENCY_CALLING: LDS
 AZ_AES_API_BASIC_TSAPI_SUBS: 1000
 AZ_VERINT_DUAL: 1.0
 DATA_OUT_CDR: 1000
 workbook:
-    applications:
-      site:
-        '1':
-          type: remote
-          dial_plan: 101
-          codec: g711
-          e911: 'y'
-          call_routing: 'n'
-          utc_offset: '-05:00'
-          uc_users: 4000
-          cc_users: 500
-          name: Remote Site1
-          trunk:
-            - 2
-        '2':
-          type: remote
-          dial_plan: 101
-          codec: g711
-          e911: 'y'
-          call_routing: 'n'
-          utc_offset: '-05:00'
-          uc_users: 5079
-          cc_users: 500
-          name:  Remote Site2
-          trunk:
-            - 2
-      cm_users_split:
-        - cc: 1000
-          uc: 9079
-      trunk:
-        '1':
-          name: trunk1
-          region: NAR
-          sip_svr_cnnt:
-            - test1.trunk.cpaas.avayacloud.com,5061,tls
-        '2':
-          name: trunk2
-          region: NAR
-          sip_svr_cnnt:
-            - test2.trunk.cpass.avayacloud.com,5060,udp
-      region:
-        NAR:
-          dial_plan: 101
-          trunk:
-            - 1
-      cdr:
-        internal_calls_records: 0
-      verint:
-        verint_domain: 'gbt01.verintcloudservices.com'
-        verint_subnet: 1.1.1.0/26
-        dual:
-        recs: 100
-        ris:
-            - 'gbt01.verintcloudservices.com'
-            - 'gbt01.verintcloudservices.com'
-        uri_groups:
-            - '[+]?[1]?555??????[0-9]{1}@.*'
-            - '[+]?[1]?555??????[0-9]{1}@.*'
-Now i want to modify above yaml for 250 remote site and 40,000 subscribers please modify the yaml for me and send the modified yaml
+  applications:
+    site:
+      '1':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 292
+        cc_users: 10
+        name: Remote Site 1 - Boston
+        trunk:
+          - 1
+      '2':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 181
+        cc_users: 3
+        name: Remote Site 2 - New York
+        trunk:
+          - 3
+      '3':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 108
+        cc_users: 3
+        name: Remote Site 3 - Chicago
+        trunk:
+          - 2
+      '4':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 346
+        cc_users: 4
+        name: Remote Site 4 - San Francisco
+        trunk:
+          - 3
+      '5':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 242
+        cc_users: 4
+        name: Remote Site 5 - New York
+        trunk:
+          - 1
+      '6':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 174
+        cc_users: 5
+        name: Remote Site 6 - New York
+        trunk:
+          - 3
+      '7':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 111
+        cc_users: 10
+        name: Remote Site 7 - Denver
+        trunk:
+          - 1
+      '8':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 322
+        cc_users: 6
+        name: Remote Site 8 - Houston
+        trunk:
+          - 1
+      '9':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 224
+        cc_users: 6
+        name: Remote Site 9 - Chicago
+        trunk:
+          - 2
+      '10':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 271
+        cc_users: 8
+        name: Remote Site 10 - Dallas
+        trunk:
+          - 3
+      '11':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 272
+        cc_users: 9
+        name: Remote Site 11 - Seattle
+        trunk:
+          - 3
+      '12':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 325
+        cc_users: 8
+        name: Remote Site 12 - Austin
+        trunk:
+          - 2
+      '13':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 187
+        cc_users: 4
+        name: Remote Site 13 - Seattle
+        trunk:
+          - 1
+      '14':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 280
+        cc_users: 8
+        name: Remote Site 14 - New York
+        trunk:
+          - 3
+      '15':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 244
+        cc_users: 8
+        name: Remote Site 15 - Dallas
+        trunk:
+          - 2
+      '16':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 299
+        cc_users: 5
+        name: Remote Site 16 - Seattle
+        trunk:
+          - 2
+      '17':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 191
+        cc_users: 9
+        name: Remote Site 17 - Chicago
+        trunk:
+          - 1
+      '18':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 173
+        cc_users: 8
+        name: Remote Site 18 - Charlotte
+        trunk:
+          - 3
+      '19':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 173
+        cc_users: 8
+        name: Remote Site 19 - Charlotte
+        trunk:
+          - 2
+      '20':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 58
+        cc_users: 3
+        name: Remote Site 20 - Los Angeles
+        trunk:
+          - 2
+      '21':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 174
+        cc_users: 10
+        name: Remote Site 21 - Boston
+        trunk:
+          - 2
+      '22':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 333
+        cc_users: 7
+        name: Remote Site 22 - Houston
+        trunk:
+          - 3
+      '23':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 219
+        cc_users: 8
+        name: Remote Site 23 - Seattle
+        trunk:
+          - 2
+      '24':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 178
+        cc_users: 4
+        name: Remote Site 24 - Chicago
+        trunk:
+          - 2
+      '25':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 324
+        cc_users: 3
+        name: Remote Site 25 - Miami
+        trunk:
+          - 1
+      '26':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 297
+        cc_users: 10
+        name: Remote Site 26 - New York
+        trunk:
+          - 3
+      '27':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 194
+        cc_users: 4
+        name: Remote Site 27 - Miami
+        trunk:
+          - 2
+      '28':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 234
+        cc_users: 1
+        name: Remote Site 28 - Houston
+        trunk:
+          - 3
+      '29':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 114
+        cc_users: 1
+        name: Remote Site 29 - Seattle
+        trunk:
+          - 3
+      '30':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 114
+        cc_users: 8
+        name: Remote Site 30 - Austin
+        trunk:
+          - 1
+      '31':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 56
+        cc_users: 8
+        name: Remote Site 31 - Boston
+        trunk:
+          - 2
+      '32':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 224
+        cc_users: 1
+        name: Remote Site 32 - Austin
+        trunk:
+          - 2
+      '33':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 294
+        cc_users: 2
+        name: Remote Site 33 - Boston
+        trunk:
+          - 2
+      '34':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 87
+        cc_users: 1
+        name: Remote Site 34 - Dallas
+        trunk:
+          - 1
+      '35':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 338
+        cc_users: 2
+        name: Remote Site 35 - Chicago
+        trunk:
+          - 1
+      '36':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 335
+        cc_users: 10
+        name: Remote Site 36 - Charlotte
+        trunk:
+          - 3
+      '37':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 165
+        cc_users: 7
+        name: Remote Site 37 - Orlando
+        trunk:
+          - 2
+      '38':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 276
+        cc_users: 10
+        name: Remote Site 38 - Seattle
+        trunk:
+          - 2
+      '39':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 341
+        cc_users: 10
+        name: Remote Site 39 - Chicago
+        trunk:
+          - 3
+      '40':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 156
+        cc_users: 5
+        name: Remote Site 40 - Chicago
+        trunk:
+          - 3
+      '41':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 130
+        cc_users: 9
+        name: Remote Site 41 - Dallas
+        trunk:
+          - 1
+      '42':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 51
+        cc_users: 10
+        name: Remote Site 42 - Seattle
+        trunk:
+          - 2
+      '43':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 66
+        cc_users: 5
+        name: Remote Site 43 - Austin
+        trunk:
+          - 3
+      '44':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 282
+        cc_users: 3
+        name: Remote Site 44 - Charlotte
+        trunk:
+          - 2
+      '45':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 151
+        cc_users: 9
+        name: Remote Site 45 - San Francisco
+        trunk:
+          - 1
+      '46':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 126
+        cc_users: 3
+        name: Remote Site 46 - Atlanta
+        trunk:
+          - 1
+      '47':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 134
+        cc_users: 10
+        name: Remote Site 47 - Austin
+        trunk:
+          - 3
+      '48':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 341
+        cc_users: 8
+        name: Remote Site 48 - Boston
+        trunk:
+          - 1
+      '49':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 205
+        cc_users: 5
+        name: Remote Site 49 - Houston
+        trunk:
+          - 3
+      '50':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 302
+        cc_users: 10
+        name: Remote Site 50 - Orlando
+        trunk:
+          - 1
+      '51':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 271
+        cc_users: 10
+        name: Remote Site 51 - Atlanta
+        trunk:
+          - 2
+      '52':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 96
+        cc_users: 10
+        name: Remote Site 52 - Atlanta
+        trunk:
+          - 3
+      '53':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 187
+        cc_users: 3
+        name: Remote Site 53 - Houston
+        trunk:
+          - 2
+      '54':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 276
+        cc_users: 3
+        name: Remote Site 54 - Phoenix
+        trunk:
+          - 3
+      '55':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 301
+        cc_users: 8
+        name: Remote Site 55 - Phoenix
+        trunk:
+          - 2
+      '56':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 220
+        cc_users: 2
+        name: Remote Site 56 - Denver
+        trunk:
+          - 1
+      '57':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 260
+        cc_users: 5
+        name: Remote Site 57 - Phoenix
+        trunk:
+          - 3
+      '58':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 331
+        cc_users: 1
+        name: Remote Site 58 - Seattle
+        trunk:
+          - 2
+      '59':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 215
+        cc_users: 7
+        name: Remote Site 59 - Austin
+        trunk:
+          - 3
+      '60':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 9
+        name: Remote Site 60 - Phoenix
+        trunk:
+          - 2
+      '61':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 77
+        cc_users: 6
+        name: Remote Site 61 - Charlotte
+        trunk:
+          - 3
+      '62':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 305
+        cc_users: 1
+        name: Remote Site 62 - Seattle
+        trunk:
+          - 1
+      '63':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -08:00
+        uc_users: 331
+        cc_users: 5
+        name: Remote Site 63 - Orlando
+        trunk:
+          - 2
+      '64':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 298
+        cc_users: 10
+        name: Remote Site 64 - Los Angeles
+        trunk:
+          - 1
+      '65':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 131
+        cc_users: 1
+        name: Remote Site 65 - Phoenix
+        trunk:
+          - 3
+      '66':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 97
+        cc_users: 2
+        name: Remote Site 66 - Chicago
+        trunk:
+          - 2
+      '67':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 128
+        cc_users: 5
+        name: Remote Site 67 - Los Angeles
+        trunk:
+          - 3
+      '68':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 189
+        cc_users: 8
+        name: Remote Site 68 - Miami
+        trunk:
+          - 2
+      '69':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 283
+        cc_users: 7
+        name: Remote Site 69 - Orlando
+        trunk:
+          - 1
+      '70':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 310
+        cc_users: 3
+        name: Remote Site 70 - Seattle
+        trunk:
+          - 1
+      '71':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 262
+        cc_users: 9
+        name: Remote Site 71 - Austin
+        trunk:
+          - 2
+      '72':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 51
+        cc_users: 5
+        name: Remote Site 72 - New York
+        trunk:
+          - 3
+      '73':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 300
+        cc_users: 8
+        name: Remote Site 73 - Boston
+        trunk:
+          - 3
+      '74':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -07:00
+        uc_users: 226
+        cc_users: 9
+        name: Remote Site 74 - Boston
+        trunk:
+          - 2
+      '75':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 214
+        cc_users: 4
+        name: Remote Site 75 - Phoenix
+        trunk:
+          - 3
+      '76':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 169
+        cc_users: 7
+        name: Remote Site 76 - Denver
+        trunk:
+          - 1
+      '77':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 292
+        cc_users: 7
+        name: Remote Site 77 - San Francisco
+        trunk:
+          - 2
+      '78':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 127
+        cc_users: 1
+        name: Remote Site 78 - Houston
+        trunk:
+          - 1
+      '79':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 219
+        cc_users: 8
+        name: Remote Site 79 - Houston
+        trunk:
+          - 1
+      '80':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 283
+        cc_users: 2
+        name: Remote Site 80 - Austin
+        trunk:
+          - 2
+      '81':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 129
+        cc_users: 4
+        name: Remote Site 81 - New York
+        trunk:
+          - 2
+      '82':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 253
+        cc_users: 6
+        name: Remote Site 82 - Austin
+        trunk:
+          - 3
+      '83':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 323
+        cc_users: 6
+        name: Remote Site 83 - Los Angeles
+        trunk:
+          - 3
+      '84':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 299
+        cc_users: 1
+        name: Remote Site 84 - Chicago
+        trunk:
+          - 3
+      '85':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 170
+        cc_users: 5
+        name: Remote Site 85 - Los Angeles
+        trunk:
+          - 1
+      '86':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 96
+        cc_users: 2
+        name: Remote Site 86 - Los Angeles
+        trunk:
+          - 3
+      '87':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 101
+        cc_users: 5
+        name: Remote Site 87 - Atlanta
+        trunk:
+          - 1
+      '88':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 216
+        cc_users: 5
+        name: Remote Site 88 - Denver
+        trunk:
+          - 2
+      '89':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 270
+        cc_users: 9
+        name: Remote Site 89 - New York
+        trunk:
+          - 2
+      '90':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 142
+        cc_users: 2
+        name: Remote Site 90 - Austin
+        trunk:
+          - 3
+      '91':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 245
+        cc_users: 4
+        name: Remote Site 91 - Orlando
+        trunk:
+          - 2
+      '92':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 348
+        cc_users: 8
+        name: Remote Site 92 - Seattle
+        trunk:
+          - 3
+      '93':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 285
+        cc_users: 1
+        name: Remote Site 93 - Orlando
+        trunk:
+          - 2
+      '94':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 197
+        cc_users: 3
+        name: Remote Site 94 - Boston
+        trunk:
+          - 1
+      '95':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 226
+        cc_users: 5
+        name: Remote Site 95 - Phoenix
+        trunk:
+          - 3
+      '96':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 178
+        cc_users: 5
+        name: Remote Site 96 - Phoenix
+        trunk:
+          - 1
+      '97':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 297
+        cc_users: 7
+        name: Remote Site 97 - Denver
+        trunk:
+          - 3
+      '98':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 344
+        cc_users: 5
+        name: Remote Site 98 - Austin
+        trunk:
+          - 1
+      '99':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 252
+        cc_users: 10
+        name: Remote Site 99 - Charlotte
+        trunk:
+          - 3
+      '100':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 75
+        cc_users: 8
+        name: Remote Site 100 - Charlotte
+        trunk:
+          - 2
+      '101':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 167
+        cc_users: 6
+        name: Remote Site 101 - San Francisco
+        trunk:
+          - 1
+      '102':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 147
+        cc_users: 3
+        name: Remote Site 102 - Chicago
+        trunk:
+          - 3
+      '103':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -08:00
+        uc_users: 70
+        cc_users: 8
+        name: Remote Site 103 - New York
+        trunk:
+          - 1
+      '104':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 236
+        cc_users: 2
+        name: Remote Site 104 - Denver
+        trunk:
+          - 2
+      '105':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -07:00
+        uc_users: 262
+        cc_users: 3
+        name: Remote Site 105 - Orlando
+        trunk:
+          - 3
+      '106':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 237
+        cc_users: 5
+        name: Remote Site 106 - Seattle
+        trunk:
+          - 1
+      '107':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -07:00
+        uc_users: 296
+        cc_users: 5
+        name: Remote Site 107 - Austin
+        trunk:
+          - 3
+      '108':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 223
+        cc_users: 8
+        name: Remote Site 108 - Dallas
+        trunk:
+          - 1
+      '109':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 165
+        cc_users: 7
+        name: Remote Site 109 - Denver
+        trunk:
+          - 3
+      '110':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 96
+        cc_users: 1
+        name: Remote Site 110 - Houston
+        trunk:
+          - 2
+      '111':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 113
+        cc_users: 5
+        name: Remote Site 111 - Phoenix
+        trunk:
+          - 3
+      '112':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 240
+        cc_users: 4
+        name: Remote Site 112 - Atlanta
+        trunk:
+          - 2
+      '113':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 337
+        cc_users: 10
+        name: Remote Site 113 - San Francisco
+        trunk:
+          - 1
+      '114':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 82
+        cc_users: 8
+        name: Remote Site 114 - Seattle
+        trunk:
+          - 3
+      '115':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -08:00
+        uc_users: 259
+        cc_users: 1
+        name: Remote Site 115 - Seattle
+        trunk:
+          - 1
+      '116':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 302
+        cc_users: 4
+        name: Remote Site 116 - Dallas
+        trunk:
+          - 3
+      '117':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 248
+        cc_users: 9
+        name: Remote Site 117 - New York
+        trunk:
+          - 2
+      '118':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 129
+        cc_users: 2
+        name: Remote Site 118 - New York
+        trunk:
+          - 2
+      '119':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 258
+        cc_users: 5
+        name: Remote Site 119 - Los Angeles
+        trunk:
+          - 1
+      '120':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 239
+        cc_users: 8
+        name: Remote Site 120 - Austin
+        trunk:
+          - 1
+      '121':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 235
+        cc_users: 10
+        name: Remote Site 121 - Houston
+        trunk:
+          - 2
+      '122':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 233
+        cc_users: 4
+        name: Remote Site 122 - Chicago
+        trunk:
+          - 1
+      '123':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 282
+        cc_users: 3
+        name: Remote Site 123 - San Francisco
+        trunk:
+          - 3
+      '124':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 60
+        cc_users: 5
+        name: Remote Site 124 - Dallas
+        trunk:
+          - 1
+      '125':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 339
+        cc_users: 9
+        name: Remote Site 125 - New York
+        trunk:
+          - 1
+      '126':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 160
+        cc_users: 4
+        name: Remote Site 126 - Charlotte
+        trunk:
+          - 2
+      '127':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 125
+        cc_users: 10
+        name: Remote Site 127 - Seattle
+        trunk:
+          - 1
+      '128':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 124
+        cc_users: 9
+        name: Remote Site 128 - Charlotte
+        trunk:
+          - 2
+      '129':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 139
+        cc_users: 1
+        name: Remote Site 129 - Atlanta
+        trunk:
+          - 1
+      '130':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 233
+        cc_users: 4
+        name: Remote Site 130 - Denver
+        trunk:
+          - 3
+      '131':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 58
+        cc_users: 1
+        name: Remote Site 131 - Los Angeles
+        trunk:
+          - 1
+      '132':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 265
+        cc_users: 2
+        name: Remote Site 132 - Boston
+        trunk:
+          - 2
+      '133':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 235
+        cc_users: 2
+        name: Remote Site 133 - Houston
+        trunk:
+          - 2
+      '134':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -08:00
+        uc_users: 163
+        cc_users: 1
+        name: Remote Site 134 - Charlotte
+        trunk:
+          - 3
+      '135':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 316
+        cc_users: 1
+        name: Remote Site 135 - Boston
+        trunk:
+          - 1
+      '136':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 255
+        cc_users: 2
+        name: Remote Site 136 - Los Angeles
+        trunk:
+          - 2
+      '137':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 277
+        cc_users: 1
+        name: Remote Site 137 - New York
+        trunk:
+          - 2
+      '138':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 125
+        cc_users: 4
+        name: Remote Site 138 - San Francisco
+        trunk:
+          - 3
+      '139':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 349
+        cc_users: 6
+        name: Remote Site 139 - New York
+        trunk:
+          - 2
+      '140':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 321
+        cc_users: 9
+        name: Remote Site 140 - Phoenix
+        trunk:
+          - 3
+      '141':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 100
+        cc_users: 2
+        name: Remote Site 141 - San Francisco
+        trunk:
+          - 3
+      '142':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 332
+        cc_users: 4
+        name: Remote Site 142 - Boston
+        trunk:
+          - 2
+      '143':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 166
+        cc_users: 8
+        name: Remote Site 143 - Phoenix
+        trunk:
+          - 2
+      '144':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 98
+        cc_users: 6
+        name: Remote Site 144 - Seattle
+        trunk:
+          - 3
+      '145':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 241
+        cc_users: 8
+        name: Remote Site 145 - Chicago
+        trunk:
+          - 1
+      '146':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 93
+        cc_users: 1
+        name: Remote Site 146 - Los Angeles
+        trunk:
+          - 3
+      '147':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 240
+        cc_users: 9
+        name: Remote Site 147 - New York
+        trunk:
+          - 1
+      '148':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 337
+        cc_users: 2
+        name: Remote Site 148 - Denver
+        trunk:
+          - 2
+      '149':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 266
+        cc_users: 1
+        name: Remote Site 149 - New York
+        trunk:
+          - 2
+      '150':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 209
+        cc_users: 10
+        name: Remote Site 150 - Miami
+        trunk:
+          - 3
+      '151':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 129
+        cc_users: 4
+        name: Remote Site 151 - Denver
+        trunk:
+          - 1
+      '152':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 334
+        cc_users: 5
+        name: Remote Site 152 - Miami
+        trunk:
+          - 3
+      '153':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 269
+        cc_users: 10
+        name: Remote Site 153 - San Francisco
+        trunk:
+          - 3
+      '154':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 335
+        cc_users: 10
+        name: Remote Site 154 - Seattle
+        trunk:
+          - 3
+      '155':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 64
+        cc_users: 5
+        name: Remote Site 155 - Denver
+        trunk:
+          - 2
+      '156':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 53
+        cc_users: 3
+        name: Remote Site 156 - San Francisco
+        trunk:
+          - 3
+      '157':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 255
+        cc_users: 10
+        name: Remote Site 157 - Chicago
+        trunk:
+          - 1
+      '158':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 321
+        cc_users: 7
+        name: Remote Site 158 - Denver
+        trunk:
+          - 2
+      '159':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -07:00
+        uc_users: 130
+        cc_users: 6
+        name: Remote Site 159 - New York
+        trunk:
+          - 3
+      '160':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 93
+        cc_users: 3
+        name: Remote Site 160 - Charlotte
+        trunk:
+          - 1
+      '161':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 75
+        cc_users: 5
+        name: Remote Site 161 - San Francisco
+        trunk:
+          - 2
+      '162':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 267
+        cc_users: 8
+        name: Remote Site 162 - Seattle
+        trunk:
+          - 2
+      '163':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 160
+        cc_users: 2
+        name: Remote Site 163 - Phoenix
+        trunk:
+          - 2
+      '164':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 106
+        cc_users: 10
+        name: Remote Site 164 - Houston
+        trunk:
+          - 2
+      '165':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 207
+        cc_users: 6
+        name: Remote Site 165 - Atlanta
+        trunk:
+          - 3
+      '166':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 53
+        cc_users: 4
+        name: Remote Site 166 - Charlotte
+        trunk:
+          - 1
+      '167':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 180
+        cc_users: 2
+        name: Remote Site 167 - Boston
+        trunk:
+          - 1
+      '168':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 270
+        cc_users: 7
+        name: Remote Site 168 - Los Angeles
+        trunk:
+          - 3
+      '169':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 167
+        cc_users: 6
+        name: Remote Site 169 - Phoenix
+        trunk:
+          - 1
+      '170':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 71
+        cc_users: 8
+        name: Remote Site 170 - Austin
+        trunk:
+          - 1
+      '171':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 210
+        cc_users: 10
+        name: Remote Site 171 - Los Angeles
+        trunk:
+          - 2
+      '172':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 210
+        cc_users: 7
+        name: Remote Site 172 - Denver
+        trunk:
+          - 1
+      '173':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 10
+        name: Remote Site 173 - Austin
+        trunk:
+          - 2
+      '174':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 1
+        name: Remote Site 174 - Phoenix
+        trunk:
+          - 1
+      '175':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 7
+        name: Remote Site 175 - Los Angeles
+        trunk:
+          - 2
+      '176':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 3
+        name: Remote Site 176 - Houston
+        trunk:
+          - 1
+      '177':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 4
+        name: Remote Site 177 - Denver
+        trunk:
+          - 2
+      '178':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 3
+        name: Remote Site 178 - Miami
+        trunk:
+          - 2
+      '179':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 2
+        name: Remote Site 179 - Charlotte
+        trunk:
+          - 1
+      '180':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 9
+        name: Remote Site 180 - Boston
+        trunk:
+          - 3
+      '181':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 181 - Austin
+        trunk:
+          - 2
+      '182':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 182 - Boston
+        trunk:
+          - 2
+      '183':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 183 - Denver
+        trunk:
+          - 1
+      '184':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 184 - Atlanta
+        trunk:
+          - 2
+      '185':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 185 - San Francisco
+        trunk:
+          - 1
+      '186':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 186 - Boston
+        trunk:
+          - 2
+      '187':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 187 - Orlando
+        trunk:
+          - 2
+      '188':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 188 - Boston
+        trunk:
+          - 3
+      '189':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 189 - Chicago
+        trunk:
+          - 2
+      '190':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 190 - San Francisco
+        trunk:
+          - 3
+      '191':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 191 - Houston
+        trunk:
+          - 2
+      '192':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 192 - Orlando
+        trunk:
+          - 2
+      '193':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 193 - New York
+        trunk:
+          - 3
+      '194':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 194 - Denver
+        trunk:
+          - 1
+      '195':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 195 - Seattle
+        trunk:
+          - 2
+      '196':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 196 - Dallas
+        trunk:
+          - 3
+      '197':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 197 - New York
+        trunk:
+          - 1
+      '198':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 198 - Charlotte
+        trunk:
+          - 3
+      '199':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 199 - San Francisco
+        trunk:
+          - 1
+      '200':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 200 - Seattle
+        trunk:
+          - 2
+      '201':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 201 - Miami
+        trunk:
+          - 2
+      '202':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 202 - Seattle
+        trunk:
+          - 1
+      '203':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 203 - Orlando
+        trunk:
+          - 3
+      '204':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 204 - Dallas
+        trunk:
+          - 3
+      '205':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 205 - Charlotte
+        trunk:
+          - 3
+      '206':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 206 - Denver
+        trunk:
+          - 2
+      '207':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 207 - Charlotte
+        trunk:
+          - 2
+      '208':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 208 - Charlotte
+        trunk:
+          - 2
+      '209':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 209 - San Francisco
+        trunk:
+          - 2
+      '210':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 210 - Charlotte
+        trunk:
+          - 2
+      '211':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 211 - Austin
+        trunk:
+          - 1
+      '212':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 212 - Atlanta
+        trunk:
+          - 2
+      '213':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 213 - Los Angeles
+        trunk:
+          - 1
+      '214':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 214 - Charlotte
+        trunk:
+          - 1
+      '215':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 215 - Austin
+        trunk:
+          - 1
+      '216':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 216 - Orlando
+        trunk:
+          - 2
+      '217':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 217 - Phoenix
+        trunk:
+          - 1
+      '218':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 218 - Denver
+        trunk:
+          - 1
+      '219':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 219 - San Francisco
+        trunk:
+          - 3
+      '220':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 220 - Seattle
+        trunk:
+          - 1
+      '221':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 221 - Boston
+        trunk:
+          - 3
+      '222':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 222 - Seattle
+        trunk:
+          - 1
+      '223':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 223 - New York
+        trunk:
+          - 3
+      '224':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 224 - Seattle
+        trunk:
+          - 1
+      '225':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 225 - Charlotte
+        trunk:
+          - 3
+      '226':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 226 - Houston
+        trunk:
+          - 3
+      '227':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 227 - Los Angeles
+        trunk:
+          - 1
+      '228':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 228 - Denver
+        trunk:
+          - 3
+      '229':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 229 - San Francisco
+        trunk:
+          - 3
+      '230':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 230 - Houston
+        trunk:
+          - 1
+      '231':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 231 - Atlanta
+        trunk:
+          - 3
+      '232':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 232 - Phoenix
+        trunk:
+          - 3
+      '233':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 233 - Charlotte
+        trunk:
+          - 2
+      '234':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 234 - Los Angeles
+        trunk:
+          - 3
+      '235':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 235 - Denver
+        trunk:
+          - 3
+      '236':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 236 - Boston
+        trunk:
+          - 3
+      '237':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 237 - Charlotte
+        trunk:
+          - 3
+      '238':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 238 - Charlotte
+        trunk:
+          - 1
+      '239':
+        type: remote
+        dial_plan: 101
+        codec: g729
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 239 - Houston
+        trunk:
+          - 2
+      '240':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 240 - Seattle
+        trunk:
+          - 2
+      '241':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 241 - Denver
+        trunk:
+          - 2
+      '242':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 242 - Chicago
+        trunk:
+          - 2
+      '243':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 243 - Boston
+        trunk:
+          - 3
+      '244':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'y'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 244 - Los Angeles
+        trunk:
+          - 2
+      '245':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -06:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 245 - Charlotte
+        trunk:
+          - 2
+      '246':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -08:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 246 - New York
+        trunk:
+          - 2
+      '247':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 247 - Chicago
+        trunk:
+          - 1
+      '248':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 248 - New York
+        trunk:
+          - 2
+      '249':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -05:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 249 - Boston
+        trunk:
+          - 2
+      '250':
+        type: remote
+        dial_plan: 101
+        codec: g711
+        e911: 'y'
+        call_routing: 'n'
+        utc_offset: -07:00
+        uc_users: 50
+        cc_users: 0
+        name: Remote Site 250 - Los Angeles
+        trunk:
+          - 1
+    cm_users_split:
+      - cc: 1000
+        uc: 40000
+    trunk:
+      '1':
+        name: trunk-east
+        region: NAR
+        sip_svr_cnnt:
+          - east1.trunk.cpaas.avayacloud.com,5061,tls
+      '2':
+        name: trunk-central
+        region: NAR
+        sip_svr_cnnt:
+          - central2.trunk.cpaas.avayacloud.com,5060,udp
+      '3':
+        name: trunk-west
+        region: NAR
+        sip_svr_cnnt:
+          - west3.trunk.cpaas.avayacloud.com,5061,tls
+    region:
+      NAR:
+        dial_plan: 101
+        trunk:
+          - 1
+          - 2
+          - 3
+    cdr:
+      internal_calls_records: 0
+    verint:
+      verint_domain: 'gbt01.verintcloudservices.com'
+      verint_subnet: 1.1.1.0/26
+      dual: {}
+      recs: 100
+      ris:
+        - 'gbt01.verintcloudservices.com'
+        - 'gbt01.verintcloudservices.com'
+      uri_groups:
+        - '[+]?[1]?555??????[0-9]{1}@.*'
+        - '[+]?[1]?555??????[0-9]{1}@.*'
+
+
+Here’s a realistic complete YAML structure for 250 remote sites with 40,000 UC subscribers and 1,000 CC subscribers total.
+Main decisions for variation:
+•  User distribution: Mostly 150–180 UC users per site (average ~160), with some smaller sites (50–100) and a few larger ones (200–350)
+•  CC users: Mostly 3–5 per site, occasional sites with 0 or 8–10
+•  Trunks: 3 different trunks used (trunk 1,2,3) – sites are assigned in groups
+•  Varying configurations:
+	•  Codec: mostly g711, some g729
+	•  UTC offset: mainly -05:00 (EST), some -06:00 (CST), -07:00 (MST), -08:00 (PST)
+	•  call_routing: mostly ‘n’, 20% ‘y’
+•  Site names: “Remote Site XXX” with some city/region flavor
