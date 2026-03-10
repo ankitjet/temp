@@ -1,17 +1,98 @@
-TASK [inst_ams : Install AMS] **************************************************
-03:48:36  Monday 09 March 2026  22:18:36 +0000 (0:00:00.539)       0:00:11.272 ********** 
-03:48:54  fatal: [vmams1]: FAILED! => {"changed": true, "cmd": ["/tmp/MediaServer_10.2.0.41_2024.09.25.bin", "-i", "silent", "-f", "/tmp/silent_install.properties"], "delta": "0:00:15.764838", "end": "2026-03-09 22:18:52.340387", "msg": "non-zero return code", "rc": 1, "start": "2026-03-09 22:18:36.575549", "stderr": "Error: Unable to find a match: libwebp.x86_64 tcl.i686", "stderr_lines": ["Error: Unable to find a match: libwebp.x86_64 tcl.i686"], "stdout": "Last metadata expiration check: 1:57:47 ago on Mon 09 Mar 2026 08:21:05 PM UTC.\nNo match for argument: libwebp.x86_64\nNo match for argument: tcl.i686", "stdout_lines": ["Last metadata expiration check: 1:57:47 ago on Mon 09 Mar 2026 08:21:05 PM UTC.", "No match for argument: libwebp.x86_64", "No match for argument: tcl.i686"]}
+The error you're encountering during the Avaya Aura Media Server (AMS) installation—both via Ansible, manual execution, and Jenkins pipeline—stems from the installer's attempt to automatically resolve and install two missing dependencies (`libwebp.x86_64` and `tcl.i686`) using the system's package manager (yum/dnf). These packages are not found because your RHEL-based system (likely RHEL 8.x, based on Avaya's supported versions for Media Server 10.2) is not registered with Red Hat Subscription Management. Without registration, access to the required repositories (e.g., BaseOS and AppStream, where these packages reside) is blocked.
 
-[root@vmams1 tmp]# sudo ./MediaServer_10.2.0.41_2024.09.25.bin -i silent -f /tmp/silent_install.properties
-Updating Subscription Management repositories.
-Unable to read consumer identity
-This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
-Last metadata expiration check: 0:03:17 ago on Mon 09 Mar 2026 10:27:16 PM UTC.
-No match for argument: libwebp.x86_64
-No match for argument: tcl.i686
+### Quick Diagnosis
+- **libwebp.x86_64**: Provides WebP image format support; available in the RHEL AppStream repository.
+- **tcl.i686**: 32-bit Tcl scripting runtime; available in the RHEL BaseOS/AppStream repositories (multiarch support for i686 on x86_64 systems).
+- The installer (`MediaServer_10.2.0.41_2024.09.25.bin`) runs `yum install` (or equivalent) internally during silent mode to fetch these, but it fails due to the unregistered state.
+- Your `silent_install.properties` file looks correct and isn't the cause—it's just specifying install options (e.g., E-Lite mode, group, and directory).
 
-Content of the cat silent_install.properties
+Avaya Aura Media Server 10.2 requires RHEL 8.4 or later (up to 8.10 recommended), installed in Minimal mode, with full repository access for dependencies.
 
-INSTALL_EMLITE_SILENT=y
-LINUX_GROUP=root
-USER_INSTALL_DIR=/opt/avaya
+### Recommended Fix: Register the System
+The cleanest solution is to register your RHEL VM (`vmams1`) with a Red Hat subscription. This enables all repos without workarounds. Red Hat offers a **free Developer Subscription** (up to 16 systems, suitable for testing/VMs like yours) at no cost for non-production use.
+
+#### Steps to Register (Run as Root on `vmams1`)
+1. **Obtain Subscription Credentials**:
+   - Sign up for a free Red Hat Developer account at [developers.redhat.com/register](https://developers.redhat.com/register) (if you don't have one).
+   - Log in to [access.redhat.com](https://access.redhat.com) > Subscriptions > Create a new pool or use an existing one. Note your username, password, and pool ID (or activation key for automation).
+
+2. **Register the System**:
+   ```
+   sudo subscription-manager register --username=YOUR_REDHAT_USERNAME --password=YOUR_REDHAT_PASSWORD --auto-attach
+   ```
+   - `--auto-attach` automatically subscribes to available pools (e.g., RHEL Server).
+   - If using an activation key (recommended for automation/Jenkins): 
+     ```
+     sudo subscription-manager register --org=YOUR_ORG_ID --activationkey=YOUR_ACTIVATION_KEY --auto-attach
+     ```
+
+3. **Verify Registration**:
+   ```
+   sudo subscription-manager status
+   sudo subscription-manager list --installed
+   ```
+   - You should see active entitlements for RHEL Server.
+
+4. **Refresh Repos and Test Package Availability**:
+   ```
+   sudo dnf clean all
+   sudo dnf makecache
+   dnf search libwebp  # Should show libwebp.x86_64
+   dnf search tcl      # Should show tcl.i686
+   ```
+
+5. **(Optional) Manually Install Dependencies** (if the installer still hiccups):
+   ```
+   sudo dnf install libwebp tcl.i686
+   ```
+
+6. **Re-run the Installer**:
+   - Manual: `sudo ./MediaServer_10.2.0.41_2024.09.25.bin -i silent -f /tmp/silent_install.properties`
+   - Ansible/Jenkins: Re-trigger the pipeline/task. Ensure the Ansible playbook runs post-registration (add a pre-task to register if needed).
+
+#### Ansible Pre-Task Example (for `inst_ams` Role)
+Add this to your playbook before the install task:
+```yaml
+- name: Register RHEL system
+  redhat_subscription:
+    state: present
+    username: "{{ rh_username }}"
+    password: "{{ rh_password }}"
+    auto_attach: yes
+  become: yes
+  vars:
+    rh_username: "{{ vault_rh_username | default(omit) }}"
+    rh_password: "{{ vault_rh_password | default(omit) }}"
+
+- name: Refresh dnf cache
+  dnf:
+    update_cache: yes
+  become: yes
+```
+
+### If You Can't/Won't Register (Workarounds—Not Recommended for Production)
+These are unofficial and may break Avaya support/compliance, as Media Server explicitly requires subscribed RHEL. Use at your own risk:
+- **Switch to a Free RHEL Clone** (e.g., AlmaLinux 8 or Rocky Linux 8):
+  1. Back up your VM.
+  2. Reinstall/migrate to AlmaLinux 8.10 (mirrors RHEL repos exactly).
+  3. Enable EPEL for extras: `sudo dnf install epel-release`.
+  4. Install deps: `sudo dnf install libwebp tcl.i686`.
+  5. Re-run installer. (Avaya may not officially support clones, but they often work.)
+- **Manual RPM Download/Install** (for unregistered RHEL—limited access):
+  1. Download RPMs from a subscribed machine or mirror (e.g., [pkgs.org](https://rhel.pkgs.org) for libwebp-1.0.0-3.el8_4.x86_64.rpm and tcl-8.6.8-2.el8.i686.rpm).
+  2. Transfer to `/tmp` and install: `sudo rpm -ivh /tmp/libwebp*.rpm /tmp/tcl*.rpm --nodeps` (resolve any further deps manually).
+  3. Re-run installer.
+- **Add Third-Party Repo** (e.g., for libwebp):
+  ```
+  sudo dnf config-manager --add-repo https://extras.getpagespeed.com/redhat/8/x86_64/getpagespeed-extras-release-latest.rpm
+  sudo dnf install libwebp tcl.i686
+  ```
+  (tcl.i686 may still fail without base repos.)
+
+### Additional Tips
+- **Security/Updates**: After registration, run `sudo dnf update` to patch your system (RHEL 8.10 is the latest supported for AMS 10.2).
+- **Logs for Debugging**: Check `/var/log/yum.log` or `/var/log/dnf.log` post-failure for more details.
+- **Avaya Support**: If this is production, open a ticket with Avaya—reference doc [Deploying and Updating Media Server Appliance R10.1.x](https://documentation.avaya.com/bundle/DeployingandUpdatingMediaServerAppliance_r10.1.x) for OS prereqs.
+- **Jenkins Pipeline**: Add the registration step as an early stage, using credentials from Jenkins secrets.
+
+This should resolve the issue across all execution methods. If you share your exact RHEL version (`cat /etc/redhat-release`) or more logs, I can refine further!
