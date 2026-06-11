@@ -1,98 +1,73 @@
-The error you're encountering during the Avaya Aura Media Server (AMS) installation—both via Ansible, manual execution, and Jenkins pipeline—stems from the installer's attempt to automatically resolve and install two missing dependencies (`libwebp.x86_64` and `tcl.i686`) using the system's package manager (yum/dnf). These packages are not found because your RHEL-based system (likely RHEL 8.x, based on Avaya's supported versions for Media Server 10.2) is not registered with Red Hat Subscription Management. Without registration, access to the required repositories (e.g., BaseOS and AppStream, where these packages reside) is blocked.
+To create version 1.0.2 of the image img-appbase-rhel810-hardened-v1 with the certificate issue resolved, follow these complete steps. This is the standard process for updating an Azure Compute Gallery (SIG) image.1ca0dc
+Recommended Approach (Safest)
+Create a temporary VM from the working version 1.0.1.
+Apply the certificate fix on that VM.
+Generalize + Capture the VM as version 1.0.2.
+Step-by-Step Instructions
+1. Create a Test VM from Version 1.0.1
+Azure Portal:
+Go to Virtual machines → + Create.
+In Image, browse to your gallery → select img-appbase-rhel810-hardened-v1 → choose Version 1.0.1.
+Configure VM (size, networking, SSH key, etc.).
+Create the VM.
+Azure CLI (preferred for precision):
+az vm create \
+  --resource-group <Your-RG> \
+  --name FixCertTestVM \
+  --image "/subscriptions/<sub-id>/resourceGroups/<gallery-rg>/providers/Microsoft.Compute/galleries/<gallery-name>/images/img-appbase-rhel810-hardened-v1/versions/1.0.1" \
+  --admin-username azureuser \
+  --generate-ssh-keys \
+  --size Standard_D2s_v5 \
+  --location eastus
+2. Fix the Certificate Issue on the VM
+SSH into the new VM and apply the certificate fix (e.g., update CA trust store, install missing certs, configure OpenSSL, or whatever resolved it in 1.0.1).
+Example common commands for RHEL 8.10:
+sudo dnf update ca-certificates
+sudo update-ca-trust
+# Or install specific certs, update openssl, etc.
+# Test your application or `curl` / `openssl s_client` to verify
+Make sure the fix is permanent (installed in the right system paths).
+3. Generalize the VM (Critical for Reusability)
+Inside the VM (via SSH):
+sudo waagent -deprovision+user -force
+Type y if prompted.
+Exit the SSH session.
+From your local machine / Azure CLI:
+# Deallocate
+az vm deallocate --resource-group <Your-RG> --name FixCertTestVM
 
-### Quick Diagnosis
-- **libwebp.x86_64**: Provides WebP image format support; available in the RHEL AppStream repository.
-- **tcl.i686**: 32-bit Tcl scripting runtime; available in the RHEL BaseOS/AppStream repositories (multiarch support for i686 on x86_64 systems).
-- The installer (`MediaServer_10.2.0.41_2024.09.25.bin`) runs `yum install` (or equivalent) internally during silent mode to fetch these, but it fails due to the unregistered state.
-- Your `silent_install.properties` file looks correct and isn't the cause—it's just specifying install options (e.g., E-Lite mode, group, and directory).
-
-Avaya Aura Media Server 10.2 requires RHEL 8.4 or later (up to 8.10 recommended), installed in Minimal mode, with full repository access for dependencies.
-
-### Recommended Fix: Register the System
-The cleanest solution is to register your RHEL VM (`vmams1`) with a Red Hat subscription. This enables all repos without workarounds. Red Hat offers a **free Developer Subscription** (up to 16 systems, suitable for testing/VMs like yours) at no cost for non-production use.
-
-#### Steps to Register (Run as Root on `vmams1`)
-1. **Obtain Subscription Credentials**:
-   - Sign up for a free Red Hat Developer account at [developers.redhat.com/register](https://developers.redhat.com/register) (if you don't have one).
-   - Log in to [access.redhat.com](https://access.redhat.com) > Subscriptions > Create a new pool or use an existing one. Note your username, password, and pool ID (or activation key for automation).
-
-2. **Register the System**:
-   ```
-   sudo subscription-manager register --username=YOUR_REDHAT_USERNAME --password=YOUR_REDHAT_PASSWORD --auto-attach
-   ```
-   - `--auto-attach` automatically subscribes to available pools (e.g., RHEL Server).
-   - If using an activation key (recommended for automation/Jenkins): 
-     ```
-     sudo subscription-manager register --org=YOUR_ORG_ID --activationkey=YOUR_ACTIVATION_KEY --auto-attach
-     ```
-
-3. **Verify Registration**:
-   ```
-   sudo subscription-manager status
-   sudo subscription-manager list --installed
-   ```
-   - You should see active entitlements for RHEL Server.
-
-4. **Refresh Repos and Test Package Availability**:
-   ```
-   sudo dnf clean all
-   sudo dnf makecache
-   dnf search libwebp  # Should show libwebp.x86_64
-   dnf search tcl      # Should show tcl.i686
-   ```
-
-5. **(Optional) Manually Install Dependencies** (if the installer still hiccups):
-   ```
-   sudo dnf install libwebp tcl.i686
-   ```
-
-6. **Re-run the Installer**:
-   - Manual: `sudo ./MediaServer_10.2.0.41_2024.09.25.bin -i silent -f /tmp/silent_install.properties`
-   - Ansible/Jenkins: Re-trigger the pipeline/task. Ensure the Ansible playbook runs post-registration (add a pre-task to register if needed).
-
-#### Ansible Pre-Task Example (for `inst_ams` Role)
-Add this to your playbook before the install task:
-```yaml
-- name: Register RHEL system
-  redhat_subscription:
-    state: present
-    username: "{{ rh_username }}"
-    password: "{{ rh_password }}"
-    auto_attach: yes
-  become: yes
-  vars:
-    rh_username: "{{ vault_rh_username | default(omit) }}"
-    rh_password: "{{ vault_rh_password | default(omit) }}"
-
-- name: Refresh dnf cache
-  dnf:
-    update_cache: yes
-  become: yes
-```
-
-### If You Can't/Won't Register (Workarounds—Not Recommended for Production)
-These are unofficial and may break Avaya support/compliance, as Media Server explicitly requires subscribed RHEL. Use at your own risk:
-- **Switch to a Free RHEL Clone** (e.g., AlmaLinux 8 or Rocky Linux 8):
-  1. Back up your VM.
-  2. Reinstall/migrate to AlmaLinux 8.10 (mirrors RHEL repos exactly).
-  3. Enable EPEL for extras: `sudo dnf install epel-release`.
-  4. Install deps: `sudo dnf install libwebp tcl.i686`.
-  5. Re-run installer. (Avaya may not officially support clones, but they often work.)
-- **Manual RPM Download/Install** (for unregistered RHEL—limited access):
-  1. Download RPMs from a subscribed machine or mirror (e.g., [pkgs.org](https://rhel.pkgs.org) for libwebp-1.0.0-3.el8_4.x86_64.rpm and tcl-8.6.8-2.el8.i686.rpm).
-  2. Transfer to `/tmp` and install: `sudo rpm -ivh /tmp/libwebp*.rpm /tmp/tcl*.rpm --nodeps` (resolve any further deps manually).
-  3. Re-run installer.
-- **Add Third-Party Repo** (e.g., for libwebp):
-  ```
-  sudo dnf config-manager --add-repo https://extras.getpagespeed.com/redhat/8/x86_64/getpagespeed-extras-release-latest.rpm
-  sudo dnf install libwebp tcl.i686
-  ```
-  (tcl.i686 may still fail without base repos.)
-
-### Additional Tips
-- **Security/Updates**: After registration, run `sudo dnf update` to patch your system (RHEL 8.10 is the latest supported for AMS 10.2).
-- **Logs for Debugging**: Check `/var/log/yum.log` or `/var/log/dnf.log` post-failure for more details.
-- **Avaya Support**: If this is production, open a ticket with Avaya—reference doc [Deploying and Updating Media Server Appliance R10.1.x](https://documentation.avaya.com/bundle/DeployingandUpdatingMediaServerAppliance_r10.1.x) for OS prereqs.
-- **Jenkins Pipeline**: Add the registration step as an early stage, using credentials from Jenkins secrets.
-
-This should resolve the issue across all execution methods. If you share your exact RHEL version (`cat /etc/redhat-release`) or more logs, I can refine further!
+# Generalize
+az vm generalize --resource-group <Your-RG> --name FixCertTestVM
+4. Create New Image Version 1.0.2
+Azure Portal:
+Go to the VM → Click Capture in the top menu.
+Choose Azure Compute Gallery.
+Select your existing Image definition (img-appbase-rhel810-hardened-v1).
+Set Version number to 1.0.2.
+Add a description (e.g., "Certificate fix applied").
+Choose Target regions and replication count.
+Click Review + create → Create.
+Azure CLI (more control):
+az sig image-version create \
+  --resource-group <gallery-resource-group> \
+  --gallery-name <your-gallery-name> \
+  --gallery-image-definition img-appbase-rhel810-hardened-v1 \
+  --gallery-image-version 1.0.2 \
+  --virtual-machine "/subscriptions/<sub-id>/resourceGroups/<Your-RG>/providers/Microsoft.Compute/virtualMachines/FixCertTestVM" \
+  --target-regions eastus=1 centralus=1 \
+  --replica-count 2 \
+  --storage-account-type Standard_LRS
+This process can take 15–60+ minutes depending on replication.
+5. Verify the New Version
+az sig image-version list \
+  --resource-group <gallery-rg> \
+  --gallery-name <gallery-name> \
+  --gallery-image-definition img-appbase-rhel810-hardened-v1 -o table
+Check status in the portal under the image definition → Versions.
+Important Notes
+Generalized vs Specialized: Use generalized (as above) unless you want machine-specific accounts preserved.
+Permissions: You need Contributor/Owner rights on the gallery.
+Cleanup: After successful capture, delete the temporary FixCertTestVM to save costs.
+Best Practice: Consider using Azure Image Builder for future versions — it’s more automated and repeatable.534c58
+Replication: Ensure the new version replicates to the regions you need.
+Would you like me to give you the exact commands tailored to your gallery/subscription (share redacted details), or help with the specific certificate fix steps inside the VM? Let me know how it goes!
